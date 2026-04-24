@@ -232,7 +232,7 @@ function ProductDetail() {
 
       {/* Related */}
       {related.length > 0 && (
-        <section className="relative z-10 container mx-auto px-4 md:px-6 mt-12 pb-16">
+        <section className="relative z-10 container mx-auto px-4 md:px-6 mt-12 pb-24 lg:pb-16">
           <h2 className="text-lg font-bold mb-4 font-mono">
             <span className="text-primary">// </span>同类推荐
           </h2>
@@ -245,6 +245,41 @@ function ProductDetail() {
       )}
 
       <SiteFooter />
+
+      {/* Mobile sticky CTA bar */}
+      <div
+        className="lg:hidden fixed inset-x-0 bottom-14 z-40 border-t border-primary/40 bg-background/95 backdrop-blur-xl px-3 py-2.5"
+        style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
+      >
+        <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
+        <form onSubmit={handleCheckout} className="flex items-center gap-2">
+          <div className="flex flex-col leading-tight shrink-0">
+            <span className="text-[9px] font-mono text-muted-foreground">PRICE</span>
+            <span className="text-lg font-bold text-primary text-glow font-mono">
+              ¥{product.price.toLocaleString()}
+            </span>
+          </div>
+          <div className="relative flex-1 min-w-0">
+            <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-primary/60 pointer-events-none" />
+            <Input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="接收邮箱"
+              className="h-10 pl-8 pr-2 text-xs font-mono bg-secondary/50 border-primary/30 focus-visible:border-primary"
+            />
+          </div>
+          <Button
+            type="submit"
+            disabled={submitting}
+            className="h-10 px-3 shrink-0 bg-primary text-primary-foreground shadow-[0_0_20px_oklch(0.85_0.22_145/0.5)]"
+          >
+            <Zap className="h-4 w-4" />
+            <span className="text-xs">{submitting ? "..." : "立即支付"}</span>
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
