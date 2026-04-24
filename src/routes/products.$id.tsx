@@ -72,13 +72,13 @@ function ProductDetail() {
       <SiteHeader />
 
       {/* Breadcrumb */}
-      <div className="relative z-10 container mx-auto px-4 md:px-6 pt-6">
-        <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
-          <Link to="/" className="hover:text-primary transition flex items-center gap-1">
-            <ArrowLeft className="h-3 w-3" /> 返回首页
+      <div className="relative z-10 container mx-auto px-4 md:px-6 pt-4 md:pt-6">
+        <div className="flex items-center gap-1.5 md:gap-2 text-[11px] md:text-xs font-mono text-muted-foreground overflow-hidden">
+          <Link to="/" className="hover:text-primary transition flex items-center gap-1 shrink-0">
+            <ArrowLeft className="h-3 w-3" /> <span className="hidden sm:inline">返回首页</span><span className="sm:hidden">返回</span>
           </Link>
           <span>/</span>
-          <span className="text-primary">{product.cat}</span>
+          <span className="text-primary shrink-0">{product.cat}</span>
           <span>/</span>
           <span className="text-foreground/80 truncate">{product.title}</span>
         </div>
