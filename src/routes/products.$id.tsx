@@ -131,8 +131,8 @@ function ProductDetail() {
             )}
           </Card>
 
-          {/* Order panel */}
-          <Card className="neon-border bg-card/70 backdrop-blur border-border p-6 flex flex-col h-fit lg:sticky lg:top-20">
+          {/* Order panel — desktop full panel */}
+          <Card className="hidden lg:flex neon-border bg-card/70 backdrop-blur border-border p-6 flex-col h-fit lg:sticky lg:top-20">
             <div className="text-[10px] text-muted-foreground font-mono">PRICE</div>
             <div className="text-4xl font-bold text-primary text-glow font-mono mt-1">
               ¥{product.price.toLocaleString()}
