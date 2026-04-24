@@ -93,7 +93,7 @@ function CartPage() {
         </p>
       </section>
 
-      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-6 pb-16">
+      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-6 pb-24 lg:pb-16">
         {rows.length === 0 ? (
           <Card className="bg-card/60 border-border p-12 text-center font-mono">
             <div className="text-muted-foreground mb-4">// 购物车为空</div>
