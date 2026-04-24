@@ -192,7 +192,7 @@ function CartPage() {
                   </span>
                 </div>
               </div>
-              <form onSubmit={handleCheckout} className="mt-6 space-y-3">
+              <form id="cart-checkout-form" onSubmit={handleCheckout} className="mt-6 space-y-3">
                 <label className="block text-[10px] font-mono text-primary tracking-wider">
                   &gt; 接收邮箱 (商品将发送至此地址)
                 </label>
