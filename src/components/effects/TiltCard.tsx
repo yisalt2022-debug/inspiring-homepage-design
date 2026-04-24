@@ -1,17 +1,18 @@
-import { useRef, type ReactNode, type MouseEvent } from "react";
+import { useRef, type ReactNode, type MouseEvent, type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
 interface TiltCardProps {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
+  style?: CSSProperties;
 }
 
 /**
  * 3D tilt wrapper with a moving spotlight tracking the cursor.
  * Hover-only effect, no impact on touch devices.
  */
-export function TiltCard({ children, className, onClick }: TiltCardProps) {
+export function TiltCard({ children, className, onClick, style }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -42,6 +43,7 @@ export function TiltCard({ children, className, onClick }: TiltCardProps) {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       onClick={onClick}
+      style={style}
       className={cn(
         "tilt-card relative transition-transform duration-200 ease-out will-change-transform",
         className,
