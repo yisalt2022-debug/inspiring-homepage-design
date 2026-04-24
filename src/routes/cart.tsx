@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Trash2, Plus, Minus, ShieldCheck, Zap } from "lucide-react";
+import { ArrowLeft, Trash2, Plus, Minus, Mail, Zap, CheckCircle2, Lock } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { MatrixRain } from "@/components/effects/MatrixRain";
 import { CursorGlow } from "@/components/effects/CursorGlow";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -29,6 +31,8 @@ const initial = [
 
 function CartPage() {
   const [items, setItems] = useState(initial);
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const rows = items
     .map((it) => {
@@ -40,6 +44,20 @@ function CartPage() {
   const subtotal = rows.reduce((s, r) => s + r.product.price * r.qty, 0);
   const discount = Math.floor(subtotal * 0.05);
   const total = subtotal - discount;
+
+  const handleCheckout = (e: React.FormEvent) => {
+    e.preventDefault();
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!ok) {
+      toast.error("请输入有效的邮箱地址");
+      return;
+    }
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success(`订单已创建，${rows.length} 项商品将发送至 ${email}`);
+    }, 800);
+  };
 
   const update = (id: string, delta: number) =>
     setItems((prev) =>
@@ -95,7 +113,7 @@ function CartPage() {
                 >
                   <div className="flex items-start gap-4">
                     <div className="hidden sm:flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
-                      <ShieldCheck className="h-8 w-8 text-primary" />
+                      <Mail className="h-8 w-8 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
@@ -174,13 +192,43 @@ function CartPage() {
                   </span>
                 </div>
               </div>
-              <Button className="w-full mt-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]">
-                <Zap className="h-4 w-4" /> 提交订单
-              </Button>
-              <div className="mt-4 text-[11px] text-muted-foreground font-mono leading-relaxed">
-                · 提交后将由客户经理在 30 分钟内联系
-                <br />· 所有服务签署 NDA 与授权协议
-                <br />· 支持对公转账 / 微信 / 支付宝
+              <form onSubmit={handleCheckout} className="mt-6 space-y-3">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 接收邮箱 (商品将发送至此地址)
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  disabled={submitting || rows.length === 0}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]"
+                >
+                  <Zap className="h-4 w-4" />
+                  {submitting ? "处理中..." : `支付 ¥${total.toLocaleString()}`}
+                </Button>
+              </form>
+              <div className="mt-4 space-y-1.5 text-[11px] text-muted-foreground font-mono leading-relaxed">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3 w-3 text-primary shrink-0" />
+                  支付成功后 5 分钟内自动发送至邮箱
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Lock className="h-3 w-3 text-primary shrink-0" />
+                  邮箱仅用于交付，绝不外泄
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3 w-3 text-primary shrink-0" />
+                  支持微信 / 支付宝 / USDT
+                </div>
               </div>
             </Card>
           </div>
