@@ -113,7 +113,7 @@ function CartPage() {
                 >
                   <div className="flex items-start gap-4">
                     <div className="hidden sm:flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
-                      <ShieldCheck className="h-8 w-8 text-primary" />
+                      <Mail className="h-8 w-8 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
