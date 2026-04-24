@@ -1,8 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Tag, Clock, FileCheck, ShieldCheck, Zap, Activity } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, Tag, Clock, FileCheck, ShieldCheck, Zap, Mail, Lock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { MatrixRain } from "@/components/effects/MatrixRain";
 import { CursorGlow } from "@/components/effects/CursorGlow";
 import { SiteHeader } from "@/components/SiteHeader";
