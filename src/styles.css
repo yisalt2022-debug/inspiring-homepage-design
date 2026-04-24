@@ -149,5 +149,36 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-mono);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.85 0.22 145 / 0.18), transparent),
+      linear-gradient(oklch(0.3 0.04 150 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.3 0.04 150 / 0.05) 1px, transparent 1px);
+    background-size: auto, 32px 32px, 32px 32px;
   }
 }
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px oklch(0.85 0.22 145 / 0.6);
+  }
+  .border-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .bg-grid-fade {
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.animate-blink { animation: blink 1s steps(1) infinite; }
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+.animate-scan { animation: scan 6s linear infinite; }
+
