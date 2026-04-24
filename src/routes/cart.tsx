@@ -236,6 +236,41 @@ function CartPage() {
       </section>
 
       <SiteFooter />
+
+      {/* Mobile sticky CTA */}
+      {rows.length > 0 && (
+        <div
+          className="lg:hidden fixed inset-x-0 bottom-14 z-40 border-t border-primary/40 bg-background/95 backdrop-blur-xl px-3 py-2.5"
+          style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
+        >
+          <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col leading-tight">
+              <span className="text-[9px] font-mono text-muted-foreground">
+                合计 · {rows.length} 件
+              </span>
+              <span className="text-xl font-bold text-primary text-glow font-mono">
+                ¥{total.toLocaleString()}
+              </span>
+            </div>
+            <Button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById("cart-checkout-form");
+                el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                setTimeout(() => {
+                  const input = el?.querySelector<HTMLInputElement>("input[type=email]");
+                  input?.focus();
+                }, 350);
+              }}
+              className="h-11 px-5 bg-primary text-primary-foreground shadow-[0_0_20px_oklch(0.85_0.22_145/0.5)]"
+            >
+              <Zap className="h-4 w-4" />
+              结算并发送至邮箱
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
