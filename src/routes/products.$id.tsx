@@ -85,44 +85,44 @@ function ProductDetail() {
       </div>
 
       {/* Main */}
-      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-6 animate-fade-up">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-4 md:mt-6 animate-fade-up">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Visual / hero card */}
-          <Card className="scanlines lg:col-span-2 bg-gradient-to-br from-primary/15 via-card/60 to-secondary/40 border-primary/30 p-8 md:p-10 backdrop-blur relative overflow-hidden">
-            <span className="absolute top-2 left-2 w-4 h-4 border-t border-l border-primary/60" />
-            <span className="absolute top-2 right-2 w-4 h-4 border-t border-r border-primary/60" />
-            <span className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-primary/60" />
-            <span className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-primary/60" />
+          <Card className="scanlines lg:col-span-2 bg-gradient-to-br from-primary/15 via-card/60 to-secondary/40 border-primary/30 p-5 md:p-10 backdrop-blur relative overflow-hidden">
+            <span className="absolute top-2 left-2 w-3 h-3 md:w-4 md:h-4 border-t border-l border-primary/60" />
+            <span className="absolute top-2 right-2 w-3 h-3 md:w-4 md:h-4 border-t border-r border-primary/60" />
+            <span className="absolute bottom-2 left-2 w-3 h-3 md:w-4 md:h-4 border-b border-l border-primary/60" />
+            <span className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 border-b border-r border-primary/60" />
 
             <div className="absolute -right-10 -bottom-10 opacity-10 animate-float">
-              <ShieldCheck className="h-64 w-64 text-primary" strokeWidth={1} />
+              <ShieldCheck className="h-40 w-40 md:h-64 md:w-64 text-primary" strokeWidth={1} />
             </div>
 
             <div className="flex items-center gap-2 mb-3 flex-wrap">
-              <Badge variant="outline" className="border-primary/40 text-primary font-mono">
+              <Badge variant="outline" className="border-primary/40 text-primary font-mono text-[10px] md:text-xs">
                 <Tag className="h-3 w-3 mr-1" /> {product.cat}
               </Badge>
               {product.tag && (
-                <Badge className="bg-primary/15 text-primary border border-primary/30 font-mono">
+                <Badge className="bg-primary/15 text-primary border border-primary/30 font-mono text-[10px] md:text-xs">
                   <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-primary animate-blink" />
                   {product.tag}
                 </Badge>
               )}
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold leading-tight">
+            <h1 className="text-2xl md:text-4xl font-bold leading-tight">
               <span className="animate-glitch inline-block">{product.title}</span>
             </h1>
-            <p className="mt-4 text-muted-foreground max-w-2xl leading-relaxed">
+            <p className="mt-3 md:mt-4 text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
               {product.longDesc ?? product.desc}
             </p>
 
             {product.features && (
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {product.features.map((f) => (
                   <div
                     key={f}
-                    className="flex items-center gap-2 text-sm font-mono text-foreground/90 border border-border/40 rounded px-3 py-2 bg-background/30"
+                    className="flex items-center gap-2 text-xs md:text-sm font-mono text-foreground/90 border border-border/40 rounded px-3 py-2 bg-background/30"
                   >
                     <span className="text-primary">▸</span> {f}
                   </div>
