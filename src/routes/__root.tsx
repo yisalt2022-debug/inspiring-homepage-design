@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
+import { MobileTabBar } from "@/components/MobileTabBar";
 
 import appCss from "../styles.css?url";
 
@@ -68,7 +69,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
-      <Outlet />
+      <div className="pb-16 md:pb-0">
+        <Outlet />
+      </div>
+      <MobileTabBar />
       <Toaster theme="dark" position="top-center" />
     </>
   );

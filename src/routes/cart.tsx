@@ -93,7 +93,7 @@ function CartPage() {
         </p>
       </section>
 
-      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-6 pb-16">
+      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-6 pb-24 lg:pb-16">
         {rows.length === 0 ? (
           <Card className="bg-card/60 border-border p-12 text-center font-mono">
             <div className="text-muted-foreground mb-4">// 购物车为空</div>
@@ -108,12 +108,12 @@ function CartPage() {
               {rows.map((r, i) => (
                 <Card
                   key={r.id}
-                  className="neon-border bg-card/60 backdrop-blur border-border p-4 md:p-5 animate-fade-up"
+                  className="neon-border bg-card/60 backdrop-blur border-border p-3 md:p-5 animate-fade-up"
                   style={{ animationDelay: `${0.05 * i}s` }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="hidden sm:flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
-                      <Mail className="h-8 w-8 text-primary" />
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <div className="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
+                      <Mail className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
@@ -192,7 +192,7 @@ function CartPage() {
                   </span>
                 </div>
               </div>
-              <form onSubmit={handleCheckout} className="mt-6 space-y-3">
+              <form id="cart-checkout-form" onSubmit={handleCheckout} className="mt-6 space-y-3">
                 <label className="block text-[10px] font-mono text-primary tracking-wider">
                   &gt; 接收邮箱 (商品将发送至此地址)
                 </label>
@@ -236,6 +236,41 @@ function CartPage() {
       </section>
 
       <SiteFooter />
+
+      {/* Mobile sticky CTA */}
+      {rows.length > 0 && (
+        <div
+          className="lg:hidden fixed inset-x-0 bottom-14 z-40 border-t border-primary/40 bg-background/95 backdrop-blur-xl px-3 py-2.5"
+          style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
+        >
+          <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col leading-tight">
+              <span className="text-[9px] font-mono text-muted-foreground">
+                合计 · {rows.length} 件
+              </span>
+              <span className="text-xl font-bold text-primary text-glow font-mono">
+                ¥{total.toLocaleString()}
+              </span>
+            </div>
+            <Button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById("cart-checkout-form");
+                el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                setTimeout(() => {
+                  const input = el?.querySelector<HTMLInputElement>("input[type=email]");
+                  input?.focus();
+                }, 350);
+              }}
+              className="h-11 px-5 bg-primary text-primary-foreground shadow-[0_0_20px_oklch(0.85_0.22_145/0.5)]"
+            >
+              <Zap className="h-4 w-4" />
+              结算并发送至邮箱
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
