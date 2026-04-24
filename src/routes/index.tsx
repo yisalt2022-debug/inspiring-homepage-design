@@ -1,238 +1,197 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Shield, Terminal, Bug, Lock, Radar, FileSearch, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Search, ShoppingCart, Terminal, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "NullSec — 白帽渗透测试与红队服务" },
-      {
-        name: "description",
-        content:
-          "NullSec 是一支专业白帽安全团队，提供漏洞扫描、渗透测试、红蓝对抗与应急响应服务，帮助企业守住安全边界。",
-      },
+      { title: "NullSec Store — 安全工具与服务" },
+      { name: "description", content: "白帽安全团队提供的合规工具、培训与渗透测试服务。" },
     ],
   }),
 });
 
-const services = [
-  {
-    icon: Bug,
-    title: "Web 渗透测试",
-    desc: "基于 OWASP Top 10 与业务逻辑场景，系统化识别 Web 应用漏洞。",
-    tag: "PENTEST",
-  },
-  {
-    icon: Radar,
-    title: "外网资产测绘",
-    desc: "自动化发现暴露面，端口、子域、证书、指纹一图掌握。",
-    tag: "RECON",
-  },
-  {
-    icon: Shield,
-    title: "红蓝对抗演练",
-    desc: "模拟真实攻击者 TTPs，检验蓝队检测响应能力。",
-    tag: "RED TEAM",
-  },
-  {
-    icon: FileSearch,
-    title: "代码安全审计",
-    desc: "源码级审计与 SAST，定位深层逻辑与依赖链风险。",
-    tag: "AUDIT",
-  },
-  {
-    icon: Lock,
-    title: "等保合规咨询",
-    desc: "等保 2.0 / ISO 27001 落地辅导，差距分析到整改闭环。",
-    tag: "COMPLIANCE",
-  },
-  {
-    icon: Terminal,
-    title: "应急响应 IR",
-    desc: "7×24 小时应急响应，入侵溯源、样本分析、恢复建议。",
-    tag: "IR",
-  },
-];
+const categories = ["全部", "渗透测试", "安全培训", "代码审计", "应急响应", "合规咨询"];
 
-const stats = [
-  { num: "1200+", label: "已交付项目" },
-  { num: "350+", label: "服务客户" },
-  { num: "5800+", label: "披露漏洞" },
-  { num: "24/7", label: "应急响应" },
+const products = [
+  {
+    title: "Web 应用渗透测试服务",
+    desc: "基于 OWASP Top 10 与业务逻辑场景的系统化测试，输出可复现 PoC 报告。",
+    price: 4980,
+    tag: "热销",
+    cat: "渗透测试",
+  },
+  {
+    title: "外网资产测绘报告",
+    desc: "自动化扫描子域、端口、证书与指纹，一图掌握攻击面。",
+    price: 1280,
+    tag: "新品",
+    cat: "渗透测试",
+  },
+  {
+    title: "红队对抗演练（基础版）",
+    desc: "模拟真实攻击者 TTPs，5 天周期，检验蓝队检测响应能力。",
+    price: 12800,
+    tag: "推荐",
+    cat: "渗透测试",
+  },
+  {
+    title: "源代码安全审计",
+    desc: "SAST + 人工审计，覆盖依赖链、逻辑漏洞与硬编码密钥。",
+    price: 6800,
+    cat: "代码审计",
+  },
+  {
+    title: "白帽实战训练营（30课时）",
+    desc: "从信息收集到权限提升，全程靶场实操，颁发结业证书。",
+    price: 1980,
+    tag: "限时",
+    cat: "安全培训",
+  },
+  {
+    title: "应急响应 IR 服务包",
+    desc: "7×24 小时入侵响应，包含取证、溯源、样本分析与修复建议。",
+    price: 9800,
+    cat: "应急响应",
+  },
+  {
+    title: "等保 2.0 合规咨询",
+    desc: "差距分析到整改闭环，全流程辅导通过测评。",
+    price: 15800,
+    cat: "合规咨询",
+  },
+  {
+    title: "钓鱼演练平台（年订阅）",
+    desc: "面向员工的钓鱼模拟与安全意识培训，含数据看板。",
+    price: 8800,
+    tag: "订阅",
+    cat: "安全培训",
+  },
+  {
+    title: "API 安全专项测试",
+    desc: "针对 REST/GraphQL 接口的鉴权、越权、注入与限流测试。",
+    price: 3680,
+    cat: "渗透测试",
+  },
 ];
 
 function Index() {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* scan line effect */}
-      <div className="pointer-events-none fixed inset-0 z-0">
-        <div className="absolute left-0 right-0 h-px bg-primary/40 animate-scan" />
-      </div>
-
-      {/* Nav */}
-      <header className="relative z-10 border-b border-border/50 backdrop-blur-sm">
-        <div className="container mx-auto flex h-16 items-center justify-between px-6">
-          <div className="flex items-center gap-2">
+    <div className="min-h-screen relative">
+      {/* Header */}
+      <header className="relative z-10 border-b border-border/50 backdrop-blur-sm sticky top-0 bg-background/80">
+        <div className="container mx-auto flex h-16 items-center gap-4 px-4 md:px-6">
+          <div className="flex items-center gap-2 shrink-0">
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
               <Terminal className="h-5 w-5 text-primary" />
             </div>
-            <div>
-              <div className="text-base font-bold tracking-wider text-foreground">
+            <div className="hidden sm:block">
+              <div className="text-base font-bold tracking-wider">
                 NULL<span className="text-primary">SEC</span>
               </div>
-              <div className="text-[10px] text-muted-foreground -mt-1">offensive security lab</div>
+              <div className="text-[10px] text-muted-foreground -mt-1">store</div>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm">
-            <a href="#services" className="text-muted-foreground hover:text-primary transition">
-              ./services
-            </a>
-            <a href="#stats" className="text-muted-foreground hover:text-primary transition">
-              ./stats
-            </a>
-            <a href="#contact" className="text-muted-foreground hover:text-primary transition">
-              ./contact
-            </a>
-          </nav>
-          <Button variant="outline" size="sm" className="border-primary/40 text-primary hover:bg-primary/10">
-            发起委托
+          <div className="flex-1 max-w-xl relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="搜索商品、服务、关键词..."
+              className="pl-9 bg-secondary/40 border-border/60 focus-visible:border-primary"
+            />
+          </div>
+          <Button variant="outline" size="icon" className="border-primary/40 hover:bg-primary/10 shrink-0">
+            <ShoppingCart className="h-4 w-4 text-primary" />
           </Button>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative z-10 container mx-auto px-6 py-24 md:py-32">
-        <div className="max-w-3xl">
-          <Badge variant="outline" className="mb-6 border-primary/40 text-primary font-mono">
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-primary animate-blink" />
-            SYSTEM ONLINE · v3.2.1
-          </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-            像攻击者一样思考，
-            <br />
-            <span className="text-primary text-glow">守住你的边界</span>
-            <span className="text-primary animate-blink">_</span>
-          </h1>
-          <p className="mt-8 text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            NullSec 是一支专注于攻防对抗的白帽安全团队。我们用真实攻击者的视角审视你的系统，
-            在恶意行为者之前，发现并闭环每一个风险。
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-glow border-glow">
-              获取安全评估 <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="border-primary/40 text-foreground hover:bg-primary/10">
-              查看案例报告
-            </Button>
+      {/* Hero banner */}
+      <section className="relative z-10 container mx-auto px-4 md:px-6 pt-8">
+        <Card className="bg-gradient-to-br from-primary/15 via-card/60 to-secondary/40 border-primary/30 p-8 md:p-12 backdrop-blur relative overflow-hidden">
+          <div className="absolute top-0 right-0 px-3 py-1 text-[10px] font-mono text-primary/70 border-l border-b border-primary/30">
+            // featured
           </div>
+          <Badge variant="outline" className="border-primary/40 text-primary font-mono mb-4">
+            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-primary animate-blink" />
+            LIMITED OFFER
+          </Badge>
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+            合规白帽工具 · <span className="text-primary text-glow">企业安全一站式</span>
+          </h1>
+          <p className="mt-4 text-muted-foreground max-w-2xl">
+            所有服务均签署 NDA 与授权协议，输出标准化报告。下方为可直接下单的商品与服务套餐。
+          </p>
+        </Card>
+      </section>
 
-          {/* terminal block */}
-          <Card className="mt-14 bg-card/60 backdrop-blur border-primary/20 p-0 overflow-hidden">
-            <div className="flex items-center gap-2 border-b border-border/50 px-4 py-2 bg-secondary/40">
-              <div className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
-              <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
-              <div className="h-2.5 w-2.5 rounded-full bg-primary/70" />
-              <span className="ml-3 text-xs text-muted-foreground">~/recon/target.sh</span>
-            </div>
-            <div className="p-5 text-sm leading-relaxed font-mono">
-              <div><span className="text-primary">$</span> nullsec scan --target client.com --depth full</div>
-              <div className="text-muted-foreground">[*] Enumerating subdomains... <span className="text-primary">42 found</span></div>
-              <div className="text-muted-foreground">[*] Probing services on 128 hosts...</div>
-              <div className="text-muted-foreground">[*] Running auth bypass checks...</div>
-              <div className="text-primary">[+] 3 critical · 7 high · 12 medium findings</div>
-              <div className="text-muted-foreground">[*] Generating report → <span className="text-primary underline">report-2025-04.pdf</span></div>
-              <div><span className="text-primary">$</span> <span className="animate-blink">▋</span></div>
-            </div>
-          </Card>
+      {/* Categories */}
+      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-8">
+        <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
+          {categories.map((c, i) => (
+            <button
+              key={c}
+              className={`shrink-0 px-4 py-2 rounded-md text-sm font-mono transition border ${
+                i === 0
+                  ? "bg-primary/15 border-primary/50 text-primary"
+                  : "bg-card/40 border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40"
+              }`}
+            >
+              {c}
+            </button>
+          ))}
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="relative z-10 container mx-auto px-6 py-20 border-t border-border/50">
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <div className="text-xs text-primary font-mono mb-2">// 02 — capabilities</div>
-            <h2 className="text-3xl md:text-4xl font-bold">服务能力矩阵</h2>
-          </div>
-          <div className="hidden md:block text-sm text-muted-foreground font-mono">
-            6 modules · always loaded
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((s) => (
+      {/* Products grid */}
+      <section className="relative z-10 container mx-auto px-4 md:px-6 mt-6 pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {products.map((p) => (
             <Card
-              key={s.title}
-              className="group bg-card/60 backdrop-blur border-border hover:border-primary/60 transition-all p-6 cursor-pointer relative overflow-hidden"
+              key={p.title}
+              className="group bg-card/60 backdrop-blur border-border hover:border-primary/60 transition-all p-5 cursor-pointer relative overflow-hidden flex flex-col"
             >
-              <div className="absolute top-0 right-0 px-2 py-1 text-[10px] font-mono text-primary/60 border-l border-b border-primary/20">
-                {s.tag}
+              {p.tag && (
+                <div className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-mono rounded bg-primary/15 text-primary border border-primary/30">
+                  {p.tag}
+                </div>
+              )}
+              <div className="flex items-center gap-2 text-[11px] text-muted-foreground font-mono mb-3">
+                <Tag className="h-3 w-3" />
+                {p.cat}
               </div>
-              <div className="flex h-11 w-11 items-center justify-center rounded-md bg-primary/10 border border-primary/30 mb-5 group-hover:bg-primary/20 transition">
-                <s.icon className="h-5 w-5 text-primary" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              <div className="mt-5 flex items-center text-xs text-primary font-mono opacity-0 group-hover:opacity-100 transition">
-                read more <ArrowRight className="ml-1 h-3 w-3" />
+              <h3 className="text-base font-semibold mb-2 group-hover:text-primary transition pr-12">
+                {p.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-5 flex-1">
+                {p.desc}
+              </p>
+              <div className="flex items-end justify-between border-t border-border/50 pt-4">
+                <div>
+                  <div className="text-[10px] text-muted-foreground font-mono">PRICE</div>
+                  <div className="text-2xl font-bold text-primary text-glow font-mono">
+                    ¥{p.price.toLocaleString()}
+                  </div>
+                </div>
+                <Button
+                  size="sm"
+                  className="bg-primary/10 text-primary border border-primary/40 hover:bg-primary hover:text-primary-foreground"
+                >
+                  立即下单
+                </Button>
               </div>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Stats */}
-      <section id="stats" className="relative z-10 container mx-auto px-6 py-20 border-t border-border/50">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/50 border border-border/50 rounded-lg overflow-hidden">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-card/60 backdrop-blur p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary text-glow font-mono">{s.num}</div>
-              <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section id="contact" className="relative z-10 container mx-auto px-6 py-24 border-t border-border/50">
-        <Card className="bg-gradient-to-br from-card/80 to-secondary/40 backdrop-blur border-primary/30 p-12 md:p-16 text-center relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{ background: "var(--gradient-hero)" }}
-          />
-          <div className="relative">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              下一次入侵之前，<br />
-              <span className="text-primary text-glow">先让我们试一次。</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-              所有委托均签署 NDA 与授权协议，输出包含可复现 PoC 与修复建议的专业报告。
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-glow border-glow">
-                预约安全评估
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary/40 hover:bg-primary/10">
-                下载样本报告
-              </Button>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground font-mono">
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> 法律授权</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> NDA 保密</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> CNVD/CNNVD 协作</span>
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> ISO 27001</span>
-            </div>
-          </div>
-        </Card>
-      </section>
-
       {/* Footer */}
-      <footer className="relative z-10 border-t border-border/50 py-8">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground font-mono">
-          <div>© 2025 NULLSEC · offensive security lab</div>
+      <footer className="relative z-10 border-t border-border/50 py-6">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-muted-foreground font-mono">
+          <div>© 2025 NULLSEC STORE</div>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-blink" />
             all systems operational
