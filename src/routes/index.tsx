@@ -59,45 +59,49 @@ function Index() {
       </div>
 
       {/* Hero banner */}
-      <section className="relative z-10 container mx-auto px-4 md:px-6 pt-8 animate-fade-up">
-        <Card className="scanlines bg-gradient-to-br from-primary/15 via-card/60 to-secondary/40 border-primary/30 p-8 md:p-12 backdrop-blur relative overflow-hidden">
-          <span className="absolute top-2 left-2 w-4 h-4 border-t border-l border-primary/60" />
-          <span className="absolute top-2 right-2 w-4 h-4 border-t border-r border-primary/60" />
-          <span className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-primary/60" />
-          <span className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-primary/60" />
+      <section className="relative z-10 container mx-auto px-4 md:px-6 pt-5 md:pt-8 animate-fade-up">
+        <Card className="scanlines bg-gradient-to-br from-primary/15 via-card/60 to-secondary/40 border-primary/30 p-5 md:p-12 backdrop-blur relative overflow-hidden">
+          <span className="absolute top-2 left-2 w-3 h-3 md:w-4 md:h-4 border-t border-l border-primary/60" />
+          <span className="absolute top-2 right-2 w-3 h-3 md:w-4 md:h-4 border-t border-r border-primary/60" />
+          <span className="absolute bottom-2 left-2 w-3 h-3 md:w-4 md:h-4 border-b border-l border-primary/60" />
+          <span className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 border-b border-r border-primary/60" />
 
-          <div className="absolute top-0 right-0 px-3 py-1 text-[10px] font-mono text-primary/70 border-l border-b border-primary/30">
+          <div className="absolute top-0 right-0 px-2 md:px-3 py-1 text-[9px] md:text-[10px] font-mono text-primary/70 border-l border-b border-primary/30">
             // featured
           </div>
 
           <div className="absolute -right-6 -bottom-6 opacity-10 animate-float">
-            <ShieldCheck className="h-48 w-48 text-primary" strokeWidth={1} />
+            <ShieldCheck className="h-32 w-32 md:h-48 md:w-48 text-primary" strokeWidth={1} />
           </div>
 
-          <Badge variant="outline" className="border-primary/40 text-primary font-mono mb-4">
+          <Badge variant="outline" className="border-primary/40 text-primary font-mono mb-3 md:mb-4 text-[10px] md:text-xs">
             <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-primary animate-blink" />
             LIMITED OFFER
           </Badge>
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+          <h1 className="text-2xl md:text-5xl font-bold leading-tight">
             合规白帽工具 ·{" "}
             <span className="text-primary text-glow inline-block animate-glitch">
               企业安全一站式
             </span>
           </h1>
-          <p className="mt-4 text-muted-foreground max-w-2xl">
+          <p className="mt-3 md:mt-4 text-xs md:text-base text-muted-foreground max-w-2xl leading-relaxed">
             所有服务均签署 NDA 与授权协议，输出标准化报告。下方为可直接下单的商品与服务套餐。
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
             <Link to="/category/$slug" params={{ slug: "pentest" }}>
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]">
+              <Button
+                size="sm"
+                className="md:h-10 md:px-5 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]"
+              >
                 <Zap className="h-4 w-4" />
                 查看热销
               </Button>
             </Link>
             <Link to="/category/$slug" params={{ slug: "all" }}>
               <Button
+                size="sm"
                 variant="outline"
-                className="border-primary/40 text-primary hover:bg-primary/10"
+                className="md:h-10 md:px-5 border-primary/40 text-primary hover:bg-primary/10"
               >
                 <Activity className="h-4 w-4" />
                 浏览全部
