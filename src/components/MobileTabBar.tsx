@@ -1,12 +1,20 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Home, LayoutGrid, Search, ShoppingCart } from "lucide-react";
 
-const tabs = [
+type Tab = {
+  to: string;
+  params?: Record<string, string>;
+  label: string;
+  icon: typeof Home;
+  match?: string;
+};
+
+const tabs: Tab[] = [
   { to: "/", label: "首页", icon: Home },
   { to: "/category/$slug", params: { slug: "all" }, label: "分类", icon: LayoutGrid, match: "/category" },
   { to: "/search", label: "搜索", icon: Search },
   { to: "/cart", label: "购物车", icon: ShoppingCart },
-] as const;
+];
 
 export function MobileTabBar() {
   const { pathname } = useLocation();
