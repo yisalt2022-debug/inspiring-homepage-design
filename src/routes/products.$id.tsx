@@ -47,6 +47,22 @@ export const Route = createFileRoute("/products/$id")({
 function ProductDetail() {
   const { product } = Route.useLoaderData();
   const related = products.filter((p) => p.cat === product.cat && p.id !== product.id).slice(0, 3);
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleCheckout = (e: React.FormEvent) => {
+    e.preventDefault();
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!ok) {
+      toast.error("请输入有效的邮箱地址");
+      return;
+    }
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success(`订单已创建，商品将发送至 ${email}`);
+    }, 800);
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
