@@ -138,43 +138,69 @@ function ProductDetail() {
               ¥{product.price.toLocaleString()}
             </div>
             <div className="text-xs text-muted-foreground font-mono mt-1">
-              // 含 13% 增值税专票
+              // 一次性付费 · 永久使用
             </div>
 
             <div className="mt-5 space-y-3 text-sm">
               {product.duration && (
                 <div className="flex items-center justify-between border-b border-border/40 pb-2">
                   <span className="text-muted-foreground font-mono flex items-center gap-2">
-                    <Clock className="h-4 w-4" /> 交付周期
+                    <Clock className="h-4 w-4" /> 发送时效
                   </span>
                   <span className="text-foreground">{product.duration}</span>
                 </div>
               )}
               <div className="flex items-center justify-between border-b border-border/40 pb-2">
                 <span className="text-muted-foreground font-mono flex items-center gap-2">
-                  <FileCheck className="h-4 w-4" /> 报告类型
+                  <Mail className="h-4 w-4" /> 交付方式
                 </span>
-                <span className="text-foreground">PDF + Excel</span>
+                <span className="text-foreground">邮箱发送</span>
               </div>
               <div className="flex items-center justify-between border-b border-border/40 pb-2">
                 <span className="text-muted-foreground font-mono flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4" /> 协议保障
+                  <FileCheck className="h-4 w-4" /> 文件格式
                 </span>
-                <span className="text-foreground">NDA + 授权书</span>
+                <span className="text-foreground">PDF / ZIP</span>
+              </div>
+              <div className="flex items-center justify-between border-b border-border/40 pb-2">
+                <span className="text-muted-foreground font-mono flex items-center gap-2">
+                  <Lock className="h-4 w-4" /> 隐私保护
+                </span>
+                <span className="text-foreground">端到端加密</span>
               </div>
             </div>
 
-            <Button className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]">
-              <Zap className="h-4 w-4" /> 立即下单
-            </Button>
-            <Link to="/cart">
+            {/* Email delivery form */}
+            <form onSubmit={handleCheckout} className="mt-6 space-y-3">
+              <label className="block text-[10px] font-mono text-primary tracking-wider">
+                &gt; 接收邮箱 (商品将发送至此地址)
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
+                <Input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
+                />
+              </div>
+
               <Button
-                variant="outline"
-                className="mt-2 w-full border-primary/40 text-primary hover:bg-primary/10"
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]"
               >
-                <Activity className="h-4 w-4" /> 加入购物车
+                <Zap className="h-4 w-4" />
+                {submitting ? "处理中..." : `支付 ¥${product.price.toLocaleString()}`}
               </Button>
-            </Link>
+
+              <div className="flex items-start gap-2 mt-3 text-[11px] text-muted-foreground font-mono leading-relaxed">
+                <CheckCircle2 className="h-3.5 w-3.5 text-primary mt-0.5 shrink-0" />
+                <span>支付成功后，我们将在 {product.duration ?? "5 分钟内"} 把商品文件与下载链接发送到你填写的邮箱。请确认邮箱地址正确。</span>
+              </div>
+            </form>
           </Card>
         </div>
       </section>
