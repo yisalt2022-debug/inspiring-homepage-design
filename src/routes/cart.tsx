@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Trash2, Plus, Minus, ShieldCheck, Zap } from "lucide-react";
+import { ArrowLeft, Trash2, Plus, Minus, Mail, Zap, CheckCircle2, Lock } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { MatrixRain } from "@/components/effects/MatrixRain";
 import { CursorGlow } from "@/components/effects/CursorGlow";
 import { SiteHeader } from "@/components/SiteHeader";
