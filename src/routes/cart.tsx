@@ -108,12 +108,12 @@ function CartPage() {
               {rows.map((r, i) => (
                 <Card
                   key={r.id}
-                  className="neon-border bg-card/60 backdrop-blur border-border p-4 md:p-5 animate-fade-up"
+                  className="neon-border bg-card/60 backdrop-blur border-border p-3 md:p-5 animate-fade-up"
                   style={{ animationDelay: `${0.05 * i}s` }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="hidden sm:flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
-                      <Mail className="h-8 w-8 text-primary" />
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <div className="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/30">
+                      <Mail className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
