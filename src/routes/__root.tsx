@@ -69,7 +69,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
-      <Outlet />
+      <div className="pb-16 md:pb-0">
+        <Outlet />
+      </div>
+      <MobileTabBar />
       <Toaster theme="dark" position="top-center" />
     </>
   );
