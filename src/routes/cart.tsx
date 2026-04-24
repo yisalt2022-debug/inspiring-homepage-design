@@ -31,6 +31,8 @@ const initial = [
 
 function CartPage() {
   const [items, setItems] = useState(initial);
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const rows = items
     .map((it) => {
@@ -42,6 +44,20 @@ function CartPage() {
   const subtotal = rows.reduce((s, r) => s + r.product.price * r.qty, 0);
   const discount = Math.floor(subtotal * 0.05);
   const total = subtotal - discount;
+
+  const handleCheckout = (e: React.FormEvent) => {
+    e.preventDefault();
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!ok) {
+      toast.error("请输入有效的邮箱地址");
+      return;
+    }
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success(`订单已创建，${rows.length} 项商品将发送至 ${email}`);
+    }, 800);
+  };
 
   const update = (id: string, delta: number) =>
     setItems((prev) =>
