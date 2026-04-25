@@ -44,7 +44,7 @@ export function CursorGlow() {
       className="pointer-events-none fixed left-0 top-0 z-0 h-[500px] w-[500px] rounded-full opacity-60 mix-blend-screen blur-3xl"
       style={{
         background:
-          "radial-gradient(circle, oklch(0.85 0.22 145 / 0.35), transparent 60%)",
+          "radial-gradient(circle, color-mix(in oklab, var(--primary-glow) 40%, transparent), transparent 60%)",
       }}
     />
   );
