@@ -32,6 +32,7 @@ export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
         </Link>
 
         {/* Theme switcher — placed right after logo so it's always visible */}
+        <div className="shrink-0 px-2 py-1 bg-red-500 text-white text-xs font-bold">DEBUG</div>
         <ThemeToggle />
 
         {/* Desktop search */}
