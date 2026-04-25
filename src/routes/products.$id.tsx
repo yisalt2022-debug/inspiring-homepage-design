@@ -65,8 +65,7 @@ function ProductDetail() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <MatrixRain />
-      <CursorGlow />
+      <ThemedBackground />
 
       <SiteHeader />
 

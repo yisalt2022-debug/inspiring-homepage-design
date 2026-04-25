@@ -68,8 +68,7 @@ function CartPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <MatrixRain />
-      <CursorGlow />
+      <ThemedBackground />
       <SiteHeader />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6 pt-6">
