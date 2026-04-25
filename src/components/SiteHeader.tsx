@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Search, ShoppingCart, Terminal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useState } from "react";
 
 export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
@@ -56,11 +57,13 @@ export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
           <Search className="h-4 w-4 text-primary" />
         </Button>
 
+        <ThemeToggle />
+
         <Link to="/cart">
           <Button
             variant="outline"
             size="icon"
-            className="h-9 w-9 md:h-10 md:w-10 border-primary/40 hover:bg-primary/10 hover:shadow-[0_0_20px_oklch(0.85_0.22_145/0.4)] transition-all shrink-0"
+            className="h-9 w-9 md:h-10 md:w-10 border-primary/40 hover:bg-primary/10 hover:shadow-[0_0_20px_color-mix(in_oklab,var(--primary)_45%,transparent)] transition-all shrink-0"
             aria-label="购物车"
           >
             <ShoppingCart className="h-4 w-4 text-primary" />

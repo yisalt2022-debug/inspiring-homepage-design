@@ -3,8 +3,7 @@ import { Tag, Zap, ShieldCheck, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MatrixRain } from "@/components/effects/MatrixRain";
-import { CursorGlow } from "@/components/effects/CursorGlow";
+import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
@@ -32,15 +31,14 @@ const ticker = [
 function Index() {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <MatrixRain />
-      <CursorGlow />
+      <ThemedBackground />
 
       {/* Top scanline */}
       <div
         className="pointer-events-none fixed inset-x-0 top-0 z-[1] h-px opacity-70"
         style={{
           background:
-            "linear-gradient(90deg, transparent, oklch(0.85 0.22 145 / 0.8), transparent)",
+            "linear-gradient(90deg, transparent, var(--primary), transparent)",
         }}
       />
 
