@@ -271,7 +271,7 @@ function ProductDetail() {
             <span className="text-primary">// </span>交付物
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {product.deliverables.map((d, i) => (
+            {product.deliverables.map((d: string, i: number) => (
               <Card
                 key={d}
                 className="bg-card/60 border-border hover:border-primary/50 p-4 transition-all"
