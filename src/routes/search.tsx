@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Search as SearchIcon } from "lucide-react";
 import { z } from "zod";
-import { MatrixRain } from "@/components/effects/MatrixRain";
-import { CursorGlow } from "@/components/effects/CursorGlow";
+import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
