@@ -301,33 +301,101 @@ function ProductDetail() {
         style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
       >
         <div className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
-        <form onSubmit={handleCheckout} className="flex items-center gap-2">
-          <div className="flex flex-col leading-tight shrink-0">
-            <span className="text-[9px] font-mono text-muted-foreground">PRICE</span>
-            <span className="text-lg font-bold text-primary text-glow font-mono">
-              ¥{product.price.toLocaleString()}
-            </span>
+        <Drawer>
+          <div className="flex items-center gap-3">
+            <div className="flex flex-col leading-tight shrink-0">
+              <span className="text-[9px] font-mono text-muted-foreground">PRICE</span>
+              <span className="text-xl font-bold text-primary text-glow font-mono">
+                ¥{product.price.toLocaleString()}
+              </span>
+            </div>
+            <DrawerTrigger asChild>
+              <Button
+                type="button"
+                className="flex-1 h-11 bg-primary text-primary-foreground shadow-[0_0_20px_oklch(0.85_0.22_145/0.5)] font-mono"
+              >
+                <Zap className="h-4 w-4" />
+                立即支付
+              </Button>
+            </DrawerTrigger>
           </div>
-          <div className="relative flex-1 min-w-0">
-            <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-primary/60 pointer-events-none" />
-            <Input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="接收邮箱"
-              className="h-10 pl-8 pr-2 text-xs font-mono bg-secondary/50 border-primary/30 focus-visible:border-primary"
-            />
-          </div>
-          <Button
-            type="submit"
-            disabled={submitting}
-            className="h-10 px-3 shrink-0 bg-primary text-primary-foreground shadow-[0_0_20px_oklch(0.85_0.22_145/0.5)]"
-          >
-            <Zap className="h-4 w-4" />
-            <span className="text-xs">{submitting ? "..." : "立即支付"}</span>
-          </Button>
-        </form>
+
+          <DrawerContent className="border-primary/30">
+            <DrawerHeader className="text-left">
+              <DrawerTitle className="font-mono text-primary text-glow">
+                &gt; 填写收货信息
+              </DrawerTitle>
+              <DrawerDescription className="font-mono text-xs">
+                商品将通过邮箱发送，请确保信息正确
+              </DrawerDescription>
+            </DrawerHeader>
+
+            <form onSubmit={handleCheckout} className="px-4 pb-6 space-y-3">
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 接收手机号
+                </label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+86 138 0000 0000"
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 接收邮箱
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 备注 (选填)
+                </label>
+                <div className="relative">
+                  <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Textarea
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    placeholder="补充说明或特殊要求..."
+                    maxLength={500}
+                    rows={3}
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary resize-none"
+                  />
+                </div>
+                <div className="text-right text-[10px] font-mono text-muted-foreground">
+                  {note.length}/500
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={submitting}
+                className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)] font-mono"
+              >
+                <Zap className="h-4 w-4" />
+                {submitting ? "处理中..." : `支付 ¥${product.price.toLocaleString()}`}
+              </Button>
+            </form>
+          </DrawerContent>
+        </Drawer>
       </div>
     </div>
   );
