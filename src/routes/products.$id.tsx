@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Tag, Clock, FileCheck, ShieldCheck, Zap, Mail, Lock, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Tag, Clock, FileCheck, ShieldCheck, Zap, Mail, Lock, CheckCircle2, Phone, MessageSquare } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
