@@ -12,7 +12,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         <span className="absolute top-0 left-0 h-px w-0 bg-gradient-to-r from-transparent via-primary to-transparent group-hover:w-full transition-all duration-700" />
 
         {product.tag && (
-          <div className="absolute top-2.5 right-2.5 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 text-[9px] md:text-[10px] font-mono rounded bg-primary/15 text-primary border border-primary/30 group-hover:shadow-[0_0_12px_oklch(0.85_0.22_145/0.6)] transition-shadow">
+          <div className="absolute top-2.5 right-2.5 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 text-[9px] md:text-[10px] font-mono rounded bg-primary/15 text-primary border border-primary/30 group-hover:shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_60%,transparent)] transition-shadow">
             {product.tag}
           </div>
         )}
@@ -40,7 +40,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <Link to="/products/$id" params={{ id: product.id }}>
             <Button
               size="sm"
-              className="h-8 md:h-9 text-xs md:text-sm px-3 md:px-4 bg-primary/10 text-primary border border-primary/40 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_oklch(0.85_0.22_145/0.5)] transition-all"
+              className="h-8 md:h-9 text-xs md:text-sm px-3 md:px-4 bg-primary/10 text-primary border border-primary/40 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_color-mix(in_oklab,var(--primary)_55%,transparent)] transition-all"
             >
               查看详情
             </Button>

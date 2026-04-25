@@ -1,7 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Filter } from "lucide-react";
-import { MatrixRain } from "@/components/effects/MatrixRain";
-import { CursorGlow } from "@/components/effects/CursorGlow";
+import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
@@ -35,8 +34,7 @@ function CategoryPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <MatrixRain />
-      <CursorGlow />
+      <ThemedBackground />
       <SiteHeader />
 
       {/* Breadcrumb */}

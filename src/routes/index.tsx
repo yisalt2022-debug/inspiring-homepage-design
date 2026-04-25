@@ -3,8 +3,7 @@ import { Tag, Zap, ShieldCheck, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MatrixRain } from "@/components/effects/MatrixRain";
-import { CursorGlow } from "@/components/effects/CursorGlow";
+import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
@@ -32,15 +31,14 @@ const ticker = [
 function Index() {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <MatrixRain />
-      <CursorGlow />
+      <ThemedBackground />
 
       {/* Top scanline */}
       <div
         className="pointer-events-none fixed inset-x-0 top-0 z-[1] h-px opacity-70"
         style={{
           background:
-            "linear-gradient(90deg, transparent, oklch(0.85 0.22 145 / 0.8), transparent)",
+            "linear-gradient(90deg, transparent, var(--primary), transparent)",
         }}
       />
 
@@ -91,7 +89,7 @@ function Index() {
             <Link to="/category/$slug" params={{ slug: "pentest" }}>
               <Button
                 size="sm"
-                className="md:h-10 md:px-5 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]"
+                className="md:h-10 md:px-5 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_color-mix(in_oklab,var(--primary)_55%,transparent)]"
               >
                 <Zap className="h-4 w-4" />
                 查看热销
@@ -124,8 +122,8 @@ function Index() {
               params={{ slug: c.slug }}
               className={`shrink-0 px-4 py-2 rounded-md text-sm font-mono transition-all border hover:-translate-y-0.5 ${
                 i === 0
-                  ? "bg-primary/15 border-primary/50 text-primary shadow-[0_0_15px_oklch(0.85_0.22_145/0.3)]"
-                  : "bg-card/40 border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_oklch(0.85_0.22_145/0.2)]"
+                  ? "bg-primary/15 border-primary/50 text-primary shadow-[0_0_15px_color-mix(in_oklab,var(--primary)_35%,transparent)]"
+                  : "bg-card/40 border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_color-mix(in_oklab,var(--primary)_25%,transparent)]"
               }`}
             >
               <Tag className="h-3 w-3 inline mr-1.5 -mt-0.5" />

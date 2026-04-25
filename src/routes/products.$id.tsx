@@ -6,8 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { MatrixRain } from "@/components/effects/MatrixRain";
-import { CursorGlow } from "@/components/effects/CursorGlow";
+import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
@@ -66,8 +65,7 @@ function ProductDetail() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <MatrixRain />
-      <CursorGlow />
+      <ThemedBackground />
 
       <SiteHeader />
 
