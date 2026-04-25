@@ -7,15 +7,13 @@
 /*
  * Design system definition.
  *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
+ * Two themes are supported:
+ *   - default (Matrix green): applied via :root
+ *   - .theme-cyber (Electric blue + violet): applied on <html class="theme-cyber">
  *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * All neon colours reference the CSS variables --primary / --primary-glow,
+ * so visual effects (border-flow, tilt-card, scanlines, glow shadows…) stay
+ * automatically in sync when the theme is switched at runtime.
  */
 
 @theme inline {
@@ -63,9 +61,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ============================================================
+   THEME 1 — Matrix green (default)
+   ============================================================ */
 :root {
   --radius: 0.5rem;
-  /* Dark hacker-style theme by default */
   --background: oklch(0.16 0.02 160);
   --foreground: oklch(0.95 0.02 150);
   --card: oklch(0.19 0.025 160);
@@ -75,6 +75,7 @@
   --primary: oklch(0.85 0.22 145);
   --primary-foreground: oklch(0.16 0.02 160);
   --primary-glow: oklch(0.92 0.25 145);
+  --accent2: oklch(0.7 0.25 165);
   --secondary: oklch(0.24 0.03 160);
   --secondary-foreground: oklch(0.95 0.02 150);
   --muted: oklch(0.22 0.025 160);
@@ -87,9 +88,12 @@
   --input: oklch(0.24 0.03 160);
   --ring: oklch(0.85 0.22 145);
 
-  --gradient-primary: linear-gradient(135deg, oklch(0.85 0.22 145), oklch(0.92 0.25 145));
-  --gradient-hero: radial-gradient(ellipse at top, oklch(0.85 0.22 145 / 0.15), transparent 60%);
-  --shadow-glow: 0 0 40px oklch(0.85 0.22 145 / 0.4);
+  --grid-line: oklch(0.3 0.04 150 / 0.05);
+  --hero-glow: oklch(0.85 0.22 145 / 0.18);
+
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  --gradient-hero: radial-gradient(ellipse at top, color-mix(in oklab, var(--primary) 15%, transparent), transparent 60%);
+  --shadow-glow: 0 0 40px color-mix(in oklab, var(--primary) 40%, transparent);
   --shadow-card: 0 8px 32px oklch(0 0 0 / 0.5);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -106,41 +110,39 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+/* ============================================================
+   THEME 2 — Cyber blue + violet
+   ============================================================ */
+.theme-cyber {
+  --background: oklch(0.13 0.04 270);
+  --foreground: oklch(0.96 0.02 260);
+  --card: oklch(0.17 0.05 275);
+  --card-foreground: oklch(0.96 0.02 260);
+  --popover: oklch(0.17 0.05 275);
+  --popover-foreground: oklch(0.96 0.02 260);
+  --primary: oklch(0.72 0.21 265);          /* electric blue */
+  --primary-foreground: oklch(0.13 0.04 270);
+  --primary-glow: oklch(0.78 0.24 295);     /* violet */
+  --accent2: oklch(0.78 0.24 320);          /* magenta accent */
+  --secondary: oklch(0.22 0.06 275);
+  --secondary-foreground: oklch(0.96 0.02 260);
+  --muted: oklch(0.2 0.05 275);
+  --muted-foreground: oklch(0.7 0.06 270);
+  --accent: oklch(0.78 0.24 295);
+  --accent-foreground: oklch(0.13 0.04 270);
+  --destructive: oklch(0.7 0.27 15);
+  --destructive-foreground: oklch(0.98 0.01 260);
+  --border: oklch(0.5 0.18 275 / 35%);
+  --input: oklch(0.22 0.06 275);
+  --ring: oklch(0.72 0.21 265);
+
+  --grid-line: oklch(0.5 0.2 275 / 0.06);
+  --hero-glow: oklch(0.78 0.24 295 / 0.22);
 }
 
+/* ============================================================
+   Base layer
+   ============================================================ */
 @layer base {
   * {
     border-color: var(--color-border);
@@ -151,16 +153,30 @@
     color: var(--color-foreground);
     font-family: var(--font-mono);
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.85 0.22 145 / 0.18), transparent),
-      linear-gradient(oklch(0.3 0.04 150 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(0.3 0.04 150 / 0.05) 1px, transparent 1px);
+      radial-gradient(ellipse 80% 50% at 50% -10%, var(--hero-glow), transparent),
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: auto, 32px 32px, 32px 32px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  /* Smooth transition when switching themes */
+  html {
+    transition: color 0.5s ease;
   }
 }
 
+/* ============================================================
+   Utilities
+   ============================================================ */
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 20px oklch(0.85 0.22 145 / 0.6);
+    text-shadow: 0 0 20px color-mix(in oklab, var(--primary) 60%, transparent);
+  }
+  .text-glow-strong {
+    text-shadow:
+      0 0 8px color-mix(in oklab, var(--primary) 90%, transparent),
+      0 0 20px color-mix(in oklab, var(--primary-glow) 60%, transparent);
   }
   .border-glow {
     box-shadow: var(--shadow-glow);
@@ -168,8 +184,20 @@
   .bg-grid-fade {
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
   }
+  .bg-gradient-brand {
+    background-image: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  }
+  .text-gradient-brand {
+    background-image: linear-gradient(135deg, var(--primary), var(--primary-glow), var(--accent2, var(--primary-glow)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
+/* ============================================================
+   Animations & effects (theme-aware via CSS vars)
+   ============================================================ */
 @keyframes blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -182,7 +210,6 @@
 }
 .animate-scan { animation: scan 6s linear infinite; }
 
-/* === Entrance animations === */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
@@ -197,7 +224,7 @@
 }
 .animate-float { animation: float 4s ease-in-out infinite; }
 
-/* === Neon flowing border === */
+/* Neon flowing border */
 @keyframes border-flow {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
@@ -215,9 +242,9 @@
   background: linear-gradient(
     110deg,
     transparent 30%,
-    oklch(0.85 0.22 145 / 0.9) 45%,
-    oklch(0.92 0.25 145 / 1) 50%,
-    oklch(0.85 0.22 145 / 0.9) 55%,
+    color-mix(in oklab, var(--primary) 90%, transparent) 45%,
+    var(--primary-glow) 50%,
+    color-mix(in oklab, var(--primary) 90%, transparent) 55%,
     transparent 70%
   );
   background-size: 200% 100%;
@@ -234,7 +261,7 @@
 }
 .neon-border:hover::before { opacity: 1; }
 
-/* === Tilt card spotlight === */
+/* Tilt card spotlight */
 .tilt-card::after {
   content: "";
   position: absolute;
@@ -242,7 +269,7 @@
   border-radius: inherit;
   background: radial-gradient(
     400px circle at var(--mx, 50%) var(--my, 50%),
-    oklch(0.85 0.22 145 / 0.18),
+    color-mix(in oklab, var(--primary-glow) 22%, transparent),
     transparent 40%
   );
   opacity: 0;
@@ -252,18 +279,16 @@
 }
 .tilt-card:hover::after { opacity: 1; }
 
-/* === Marquee ticker === */
+/* Marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
+.animate-marquee { animation: marquee 40s linear infinite; }
 
-/* === Glitch text === */
+/* Glitch text */
 @keyframes glitch {
-  0%, 92%, 100% { transform: translate(0); text-shadow: 0 0 20px oklch(0.85 0.22 145 / 0.6); }
+  0%, 92%, 100% { transform: translate(0); text-shadow: 0 0 20px color-mix(in oklab, var(--primary) 60%, transparent); }
   93% { transform: translate(-2px, 1px); text-shadow: 2px 0 oklch(0.7 0.3 25 / 0.7), -2px 0 oklch(0.7 0.25 200 / 0.7); }
   94% { transform: translate(2px, -1px); text-shadow: -2px 0 oklch(0.7 0.3 25 / 0.7), 2px 0 oklch(0.7 0.25 200 / 0.7); }
   95% { transform: translate(-1px, 1px); }
@@ -271,7 +296,7 @@
 }
 .animate-glitch { animation: glitch 5s infinite; }
 
-/* === Scanline overlay === */
+/* Scanline overlay */
 .scanlines {
   position: relative;
 }
@@ -284,17 +309,67 @@
     to bottom,
     transparent 0,
     transparent 3px,
-    oklch(0.85 0.22 145 / 0.04) 3px,
-    oklch(0.85 0.22 145 / 0.04) 4px
+    color-mix(in oklab, var(--primary) 5%, transparent) 3px,
+    color-mix(in oklab, var(--primary) 5%, transparent) 4px
   );
   border-radius: inherit;
 }
 
-/* === Pulse ring === */
+/* Pulse ring */
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 oklch(0.85 0.22 145 / 0.6); }
-  70% { box-shadow: 0 0 0 12px oklch(0.85 0.22 145 / 0); }
-  100% { box-shadow: 0 0 0 0 oklch(0.85 0.22 145 / 0); }
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 60%, transparent); }
+  70% { box-shadow: 0 0 0 12px color-mix(in oklab, var(--primary) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 0%, transparent); }
 }
 .pulse-ring { animation: pulse-ring 2s infinite; }
 
+/* === Cyber-only — holographic conic sweep === */
+@keyframes holo-spin {
+  to { transform: rotate(360deg); }
+}
+.holo-ring {
+  position: relative;
+  isolation: isolate;
+}
+.holo-ring::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--primary) 60deg,
+    var(--primary-glow) 120deg,
+    var(--accent2, var(--primary-glow)) 180deg,
+    var(--primary-glow) 240deg,
+    var(--primary) 300deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  opacity: 0.7;
+  animation: holo-spin 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Theme-switch flash */
+@keyframes theme-flash {
+  0% { opacity: 0; }
+  30% { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+.theme-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: radial-gradient(circle at center, var(--primary-glow), transparent 70%);
+  mix-blend-mode: screen;
+  animation: theme-flash 0.6s ease-out forwards;
+}
