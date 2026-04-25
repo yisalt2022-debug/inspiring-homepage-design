@@ -136,7 +136,7 @@ function ProductDetail() {
 
             {product.features && (
               <div className="mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {product.features.map((f) => (
+                {product.features.map((f: string) => (
                   <div
                     key={f}
                     className="flex items-center gap-2 text-xs md:text-sm font-mono text-foreground/90 border border-border/40 rounded px-3 py-2 bg-background/30"
