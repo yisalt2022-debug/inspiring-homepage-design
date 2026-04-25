@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { Toaster } from "@/components/ui/sonner";
 import { MobileTabBar } from "@/components/MobileTabBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 import appCss from "../styles.css?url";
 
@@ -74,6 +75,10 @@ function RootComponent() {
         <Outlet />
       </div>
       <MobileTabBar />
+      {/* Floating theme switcher — always reachable, never clipped by header */}
+      <div className="fixed top-3 right-3 md:top-4 md:right-4 z-50 pointer-events-auto">
+        <ThemeToggle />
+      </div>
       <Toaster theme="dark" position="top-center" />
     </ThemeProvider>
   );
