@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { PaymentDialog } from "@/components/PaymentDialog";
 import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -52,6 +53,7 @@ function ProductDetail() {
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [payOpen, setPayOpen] = useState(false);
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,8 +74,12 @@ function ProductDetail() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      toast.success(`订单已创建，商品将发送至 ${email}`);
-    }, 800);
+      setPayOpen(true);
+    }, 300);
+  };
+
+  const handlePaid = () => {
+    toast.success(`订单已提交，商品将在审核后发送至 ${email}`);
   };
 
   return (
@@ -130,7 +136,7 @@ function ProductDetail() {
 
             {product.features && (
               <div className="mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {product.features.map((f) => (
+                {product.features.map((f: string) => (
                   <div
                     key={f}
                     className="flex items-center gap-2 text-xs md:text-sm font-mono text-foreground/90 border border-border/40 rounded px-3 py-2 bg-background/30"
@@ -265,7 +271,7 @@ function ProductDetail() {
             <span className="text-primary">// </span>交付物
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {product.deliverables.map((d, i) => (
+            {product.deliverables.map((d: string, i: number) => (
               <Card
                 key={d}
                 className="bg-card/60 border-border hover:border-primary/50 p-4 transition-all"
@@ -398,6 +404,15 @@ function ProductDetail() {
           </DrawerContent>
         </Drawer>
       </div>
+
+      <PaymentDialog
+        open={payOpen}
+        onOpenChange={setPayOpen}
+        amount={product.price}
+        productTitle={product.title}
+        email={email}
+        onPaid={handlePaid}
+      />
     </div>
   );
 }
