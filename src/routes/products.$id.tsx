@@ -404,6 +404,15 @@ function ProductDetail() {
           </DrawerContent>
         </Drawer>
       </div>
+
+      <PaymentDialog
+        open={payOpen}
+        onOpenChange={setPayOpen}
+        amount={product.price}
+        productTitle={product.title}
+        email={email}
+        onPaid={handlePaid}
+      />
     </div>
   );
 }
