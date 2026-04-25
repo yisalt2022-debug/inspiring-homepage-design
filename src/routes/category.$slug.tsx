@@ -4,7 +4,7 @@ import { ThemedBackground } from "@/components/effects/ThemedBackground";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProductCard } from "@/components/ProductCard";
-import { categories, getProductsByCategory } from "@/lib/products";
+import { categories, getProductsByCategory, type Product } from "@/lib/products";
 
 export const Route = createFileRoute("/category/$slug")({
   loader: ({ params }) => {
