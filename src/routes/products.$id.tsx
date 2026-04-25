@@ -182,19 +182,58 @@ function ProductDetail() {
 
             {/* Email delivery form */}
             <form onSubmit={handleCheckout} className="mt-6 space-y-3">
-              <label className="block text-[10px] font-mono text-primary tracking-wider">
-                &gt; 接收邮箱 (商品将发送至此地址)
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
-                <Input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
-                />
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 接收手机号
+                </label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+86 138 0000 0000"
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 接收邮箱 (商品将发送至此地址)
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-mono text-primary tracking-wider">
+                  &gt; 备注 (选填)
+                </label>
+                <div className="relative">
+                  <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-primary/60 pointer-events-none" />
+                  <Textarea
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    placeholder="补充说明或特殊要求..."
+                    maxLength={500}
+                    rows={3}
+                    className="pl-9 font-mono bg-background/60 border-primary/30 focus-visible:ring-primary/50 focus-visible:border-primary resize-none"
+                  />
+                </div>
+                <div className="text-right text-[10px] font-mono text-muted-foreground">
+                  {note.length}/500
+                </div>
               </div>
 
               <Button
