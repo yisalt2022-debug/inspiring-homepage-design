@@ -53,6 +53,7 @@ function ProductDetail() {
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [payOpen, setPayOpen] = useState(false);
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,8 +74,12 @@ function ProductDetail() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      toast.success(`订单已创建，商品将发送至 ${email}`);
-    }, 800);
+      setPayOpen(true);
+    }, 300);
+  };
+
+  const handlePaid = () => {
+    toast.success(`订单已提交，商品将在审核后发送至 ${email}`);
   };
 
   return (
