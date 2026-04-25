@@ -48,13 +48,24 @@ function ProductDetail() {
   const { product } = Route.useLoaderData();
   const related = products.filter((p) => p.cat === product.cat && p.id !== product.id).slice(0, 3);
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
+    const phoneOk = /^[0-9+\-\s()]{6,20}$/.test(phone.trim());
+    if (!phoneOk) {
+      toast.error("请输入有效的手机号");
+      return;
+    }
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if (!ok) {
       toast.error("请输入有效的邮箱地址");
+      return;
+    }
+    if (note.length > 500) {
+      toast.error("备注不能超过 500 字");
       return;
     }
     setSubmitting(true);
