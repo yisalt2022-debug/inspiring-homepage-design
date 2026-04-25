@@ -89,7 +89,7 @@ function Index() {
             <Link to="/category/$slug" params={{ slug: "pentest" }}>
               <Button
                 size="sm"
-                className="md:h-10 md:px-5 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_oklch(0.85_0.22_145/0.5)]"
+                className="md:h-10 md:px-5 bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_color-mix(in_oklab,var(--primary)_55%,transparent)]"
               >
                 <Zap className="h-4 w-4" />
                 查看热销
@@ -122,8 +122,8 @@ function Index() {
               params={{ slug: c.slug }}
               className={`shrink-0 px-4 py-2 rounded-md text-sm font-mono transition-all border hover:-translate-y-0.5 ${
                 i === 0
-                  ? "bg-primary/15 border-primary/50 text-primary shadow-[0_0_15px_oklch(0.85_0.22_145/0.3)]"
-                  : "bg-card/40 border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_oklch(0.85_0.22_145/0.2)]"
+                  ? "bg-primary/15 border-primary/50 text-primary shadow-[0_0_15px_color-mix(in_oklab,var(--primary)_35%,transparent)]"
+                  : "bg-card/40 border-border/60 text-muted-foreground hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_color-mix(in_oklab,var(--primary)_25%,transparent)]"
               }`}
             >
               <Tag className="h-3 w-3 inline mr-1.5 -mt-0.5" />

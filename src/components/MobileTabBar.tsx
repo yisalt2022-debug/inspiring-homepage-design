@@ -29,7 +29,7 @@ export function MobileTabBar() {
         className="absolute -top-px inset-x-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, oklch(0.85 0.22 145 / 0.7), transparent)",
+            "linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 80%, transparent), transparent)",
         }}
       />
       <ul className="grid grid-cols-4 h-14">
@@ -53,12 +53,12 @@ export function MobileTabBar() {
               >
                 <Icon
                   className={`h-5 w-5 transition-all ${
-                    active ? "drop-shadow-[0_0_6px_oklch(0.85_0.22_145/0.8)]" : ""
+                    active ? "drop-shadow-[0_0_6px_color-mix(in_oklab,var(--primary)_80%,transparent)]" : ""
                   }`}
                 />
                 <span>{t.label}</span>
                 {active && (
-                  <span className="absolute top-0 h-0.5 w-8 rounded-full bg-primary shadow-[0_0_8px_oklch(0.85_0.22_145/0.9)]" />
+                  <span className="absolute top-0 h-0.5 w-8 rounded-full bg-primary shadow-[0_0_8px_color-mix(in_oklab,var(--primary)_90%,transparent)]" />
                 )}
               </Link>
             </li>
