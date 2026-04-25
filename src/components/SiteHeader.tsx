@@ -31,9 +31,6 @@ export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
           </div>
         </Link>
 
-        {/* Theme switcher — placed right after logo so it's always visible */}
-        <ThemeToggle />
-
         {/* Desktop search */}
         <form onSubmit={submit} className="hidden md:block flex-1 max-w-xl relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition" />
