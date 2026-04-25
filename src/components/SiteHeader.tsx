@@ -31,6 +31,9 @@ export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
           </div>
         </Link>
 
+        {/* Theme switcher — placed right after logo so it's always visible */}
+        <ThemeToggle />
+
         {/* Desktop search */}
         <form onSubmit={submit} className="hidden md:block flex-1 max-w-xl relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition" />
@@ -38,7 +41,7 @@ export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="搜索商品、服务、关键词..."
-            className="pl-9 bg-secondary/40 border-border/60 focus-visible:border-primary focus-visible:shadow-[0_0_20px_oklch(0.85_0.22_145/0.3)] transition-shadow"
+            className="pl-9 bg-secondary/40 border-border/60 focus-visible:border-primary focus-visible:shadow-[0_0_20px_color-mix(in_oklab,var(--primary)_30%,transparent)] transition-shadow"
           />
         </form>
 
@@ -56,8 +59,6 @@ export function SiteHeader({ defaultQuery = "" }: { defaultQuery?: string }) {
         >
           <Search className="h-4 w-4 text-primary" />
         </Button>
-
-        <ThemeToggle />
 
         <Link to="/cart">
           <Button
